@@ -1,5 +1,37 @@
-[gd_scene format=3 uid="uid://bux5a3qclv0oe"]
+[gd_scene load_steps=6 format=3 uid="uid://bux5a3qclv0oe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly4q1"]
+albedo_color = Color(0.306923, 0.306923, 0.306923, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vl2d0"]
+material = SubResource("StandardMaterial3D_ly4q1")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3owb7"]
+data = PackedVector3Array(-2, 0.05, 2, 2, 0.05, 2, -2, -0.05, 2, 2, 0.05, 2, 2, -0.05, 2, -2, -0.05, 2, 2, 0.05, -2, -2, 0.05, -2, 2, -0.05, -2, -2, 0.05, -2, -2, -0.05, -2, 2, -0.05, -2, 2, 0.05, 2, 2, 0.05, -2, 2, -0.05, 2, 2, 0.05, -2, 2, -0.05, -2, 2, -0.05, 2, -2, 0.05, -2, -2, 0.05, 2, -2, -0.05, -2, -2, 0.05, 2, -2, -0.05, 2, -2, -0.05, -2, 2, 0.05, 2, -2, 0.05, 2, 2, 0.05, -2, -2, 0.05, 2, -2, 0.05, -2, 2, 0.05, -2, -2, -0.05, 2, 2, -0.05, 2, -2, -0.05, -2, 2, -0.05, 2, 2, -0.05, -2, -2, -0.05, -2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_213ad"]
+albedo_color = Color(0.666817, 0, 0.226172, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4dkrx"]
+material = SubResource("StandardMaterial3D_213ad")
+size = Vector3(4, 0.1, 4)
 
 [node name="SpaceLibrary" type="Node3D"]
+transform = Transform3D(0.999999, 0, 0.00120428, 0, 1, 0, -0.00120428, 0, 0.999999, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="FreeSpace" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vl2d0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FreeSpace"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FreeSpace/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3owb7")
+
+[node name="TurretSpace" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4dkrx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TurretSpace"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurretSpace/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3owb7")
